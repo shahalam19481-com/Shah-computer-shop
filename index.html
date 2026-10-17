@@ -1,11 +1,61 @@
-<!DOCTYPE html><html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Shah Computer & Technology</title><link rel="manifest" href="manifest.json"><meta name="theme-color" content="#0b1220"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"><style>*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}body{background:#f1f5f9}.top{background:#0b1220;color:#fff;padding:14px;text-align:center;position:sticky;top:0}.card{background:#fff;margin:10px;border-radius:12px;padding:15px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.p{background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.08)}.p img{width:100%;height:120px;object-fit:cover}.p b{display:block;padding:8px;font-size:13px}.pr{color:#e11d48;padding:0 8px 8px;font-weight:800}.bottom{position:fixed;bottom:0;width:100%;background:#0b1220;display:flex;justify-content:space-around;padding:10px;color:#fff;font-size:12px}.float{position:fixed;bottom:70px;right:10px;display:flex;flex-direction:column;gap:8px}.float a{width:50px;height:50px;border-radius:50%;display:grid;place-items:center;color:#fff;text-decoration:none;font-size:22px}.wa{background:#25d366}.fb{background:#1877f2}</style></head><body>
-<div class="top"><h3>Shah Computer & Technology</h3><small>Nabiganj | 01717280806</small></div>
-<div class="card" style="text-align:center"><h3>Shah Computer & Technology</h3><p>📍 Shahan Shah Market, Sherpur Road</p><p>📞 01717280806 | ⏰ 9AM-10PM</p></div>
-<div class="card"><b style="margin-bottom:10px;display:block">Our Products</b><div class="grid" id="g"></div></div>
-<div class="float"><a class="fb" href="https://www.facebook.com/share/1FwpbqXVei/"><i class="fab fa-facebook-f"></i></a><a class="wa" href="https://wa.me/8801717280806"><i class="fab fa-whatsapp"></i></a></div>
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shah Computer & Technology - Nabiganj</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0b1220">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
+body{background:#f1f5f9}
+.top{background:#0b1220;color:#fff;padding:14px;text-align:center;position:sticky;top:0;z-index:100}
+.top h2{font-size:18px} .top small{opacity:.8}
+.banner{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px}
+.banner img{width:100%;height:110px;border-radius:10px;object-fit:cover}
+.box{background:#fff;margin:8px;border-radius:12px;padding:12px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.product{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.07)}
+.product img{width:100%;height:130px;object-fit:cover}
+.product .info{padding:8px}
+.product b{font-size:13px;display:block;height:36px;overflow:hidden}
+.price{color:#e11d48;font-weight:900;margin-top:4px}
+.buy{background:#16a34a;color:#fff;border:none;width:100%;padding:7px;border-radius:6px;margin-top:6px;font-weight:700}
+.bottom{position:fixed;bottom:0;width:100%;background:#0b1220;color:#fff;display:flex;justify-content:space-around;padding:10px 0;z-index:100}
+.float{position:fixed;bottom:70px;right:10px;display:flex;flex-direction:column;gap:8px;z-index:99}
+.float a{width:50px;height:50px;border-radius:50%;display:grid;place-items:center;color:#fff;text-decoration:none;font-size:24px}
+.wa{background:#25d366} .fb{background:#1877f2}
+</style>
+</head>
+<body>
+<div class="top"><h2>Shah Computer & Technology</h2><small>Shahan Shah Market, Sherpur Road, Nabiganj | 01717280806</small></div>
+<div class="banner">
+<img src="https://images.unsplash.com/photo-1593642532400-2682810df593">
+<img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7">
+</div>
+<div class="box" style="text-align:center">
+<h3>স্বাগতম! আমাদের দোকানে</h3>
+<p style="margin-top:6px;font-size:14px">ল্যাপটপ, ডেস্কটপ, মনিটর, প্রিন্টার, রাউটার সহ সব কিছু পাবেন</p>
+</div>
+<div class="box"><b style="font-size:16px">আমাদের প্রোডাক্ট</b><div class="grid" id="products"></div></div>
+<div style="height:80px"></div>
+<div class="float">
+<a class="fb" href="https://www.facebook.com/share/1FwpbqXVei/"><i class="fab fa-facebook-f"></i></a>
+<a class="wa" href="https://wa.me/8801717280806"><i class="fab fa-whatsapp"></i></a>
+</div>
 <div class="bottom"><span><i class="fa fa-home"></i><br>Home</span><span><i class="fa fa-box"></i><br>Products</span><span><i class="fa fa-phone"></i><br>Contact</span></div>
 <script>
-let data=[["HP Laptop 15s Core i3","38500","https://images.unsplash.com/photo-1496181133206-80ce9b88a853"],["Gaming PC Core i5","45000","https://images.unsplash.com/photo-1593642632823-8f785ba67e45"],["Dahua 22 Monitor","8500","https://images.unsplash.com/photo-1527443224154-c4a3942d3acf"],["TP-Link Router C6","3200","https://images.unsplash.com/photo-1603899123684-92b9be0ea4c2"],["HP SSD 256GB","2800","https://images.unsplash.com/photo-1592899677977-9bb10ba5380b"],["RGB Keyboard Mouse","1200","https://images.unsplash.com/photo-1589578228447-e1a4e481c6c8"]];
-document.getElementById('g').innerHTML=data.map(x=>`<div class="p"><img src="${x[2]}"><b>${x[0]}</b><div class="pr">৳${x[1]}</div></div>`).join('');
-if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js')}
-</script></body></html>
+let items=[
+["HP 15s Core i3 Laptop","38500","https://images.unsplash.com/photo-1496181133206-80ce9b88a853"],
+["Core i5 Gaming PC","45000","https://images.unsplash.com/photo-1593642632823-8f785ba67e45"],
+["Dahua 22 Inch Monitor","8500","https://images.unsplash.com/photo-1527443224154-c4a3942d3acf"],
+["TP-Link Archer C6 Router","3200","https://images.unsplash.com/photo-1603899123684-92b9be0ea4c2"],
+["HP 256GB NVMe SSD","2800","https://images.unsplash.com/photo-1592899677977-9bb10ba5380b"],
+["RGB Gaming Keyboard Mouse","1800","https://images.unsplash.com/photo-1589578228447-e1a4e481c6c8"]
+];
+document.getElementById('products').innerHTML=items.map(i=>`<div class="product"><img src="${i[2]}"><div class="info"><b>${i[0]}</b><div class="price">৳${i[1]}</div><button class="buy" onclick="window.open('https://wa.me/8801717280806?text=আমি ${i[0]} কিনতে চাই')">অর্ডার করুন</button></div></div>`).join('');
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}
+</script>
+</body>
+</html>
