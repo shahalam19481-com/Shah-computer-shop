@@ -1,25 +1,26 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shah Computer & Technology</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shah Computer</title>
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0b1220">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<style>*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}body{background:#f0f2f5}.topbar{background:#0b1220;color:#fff;padding:12px 15px;display:flex;justify-content:space-between;position:sticky;top:0;z-index:99}.logo{font-weight:900}.logo span{background:#ff3b30;padding:2px 6px;border-radius:4px}.banner{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px}.banner img{width:100%;height:110px;border-radius:10px;object-fit:cover}.shopinfo{background:#fff;margin:10px;border-radius:12px;padding:15px;text-align:center}.cat-title{padding:12px 15px;font-weight:800}.categories{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:0 10px}.cat-card{background:#fff;border-radius:12px;padding:12px 5px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.06)}.products{padding:10px;display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding-bottom:90px}.pcard{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.06)}.pcard img{width:100%;height:130px;object-fit:cover}.pinfo{padding:8px}.pinfo h4{font-size:13px}.price{color:#e11d48;font-weight:800}.bottomnav{position:fixed;bottom:0;width:100%;background:#0b1220;color:#aaa;display:flex;justify-content:space-around;padding:8px 0}.bottomnav div{text-align:center;font-size:11px}.bottomnav i{display:block;font-size:20px}.float{position:fixed;bottom:85px;right:12px;display:flex;flex-direction:column;gap:10px}.float a{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:26px;text-decoration:none}.wa{background:#25d366}.fb{background:#1877f2}.btn{background:#16a34a;color:#fff;padding:10px 18px;border:none;border-radius:8px;font-weight:700}</style>
 </head>
-<body>
-<div class="topbar"><div class="logo"><span>ST</span> Shah Computer</div><div style="display:flex;gap:15px"><a href="https://www.facebook.com/share/1FwpbqXVei/" style="color:#fff"><i class="fab fa-facebook"></i></a></div></div>
-<div class="banner"><img src="https://images.unsplash.com/photo-1593642532400-2682810df593"><img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7"></div>
-<div class="shopinfo"><h3>Shah Computer & Technology</h3><p>📍 Shahan Shah Market, Sherpur Road, Nabigonj</p><p>📞 01717280806</p></div>
-<div class="cat-title">Products - All Categories Available</div>
-<div class="products" id="productGrid"></div>
-<div class="float"><a class="fb" href="https://www.facebook.com/share/1FwpbqXVei/"><i class="fab fa-facebook-f"></i></a><a class="wa" href="https://wa.me/8801717280806"><i class="fab fa-whatsapp"></i></a></div>
-<div class="bottomnav"><div><i class="fa fa-home"></i>Home</div><div><i class="fa fa-location-dot"></i>Location</div><div><i class="fa fa-user"></i>Account</div></div>
+<body style="margin:0;font-family:sans-serif;background:#f2f2f2">
+<div style="background:#0b1220;color:white;padding:15px;text-align:center">
+<h2 style="margin:0">Shah Computer & Technology</h2>
+<p style="margin:5px 0 0">Nabiganj - 01717280806</p>
+</div>
+<div style="padding:15px">
+<div style="background:white;padding:15px;border-radius:10px;text-align:center">
+<h3>আমাদের দোকান চালু আছে!</h3>
+<p>আপনার সাইট এখন ঠিক হচ্ছে...</p>
+<p>WhatsApp: 01717280806</p>
+<p>Facebook: Shah Computer</p>
+<a href="https://www.facebook.com/share/1FwpbqXVei/" style="display:inline-block;background:#1877f2;color:white;padding:10px 20px;border-radius:8px;text-decoration:none;margin-top:10px">Facebook এ যান</a>
+</div>
+</div>
 <script>
-let products=[{name:"HP 15s Core i3 12Gen",price:38500,img:"https://images.unsplash.com/photo-1496181133206-80ce9b88a853"},{name:"Core i5 Gaming PC",price:45000,img:"https://images.unsplash.com/photo-1593642632823-8f785ba67e45"},{name:"Dahua 22 Inch Monitor",price:8500,img:"https://images.unsplash.com/photo-1527443224154-c4a3942d3acf"},{name:"TP-Link Router C6",price:3200,img:"https://images.unsplash.com/photo-1603899123684-92b9be0ea4c2"},{name:"HP 256GB NVMe SSD",price:2800,img:"https://images.unsplash.com/photo-1592899677977-9bb10ba5380b"}];
-document.getElementById('productGrid').innerHTML=products.map(p=>`<div class="pcard"><img src="${p.img}"><div class="pinfo"><h4>${p.name}</h4><div class="price">৳${p.price}</div></div></div>`).join('');
 if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}
 </script>
 </body>
