@@ -1,27 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Shah Computer</title>
-<link rel="manifest" href="manifest.json">
-</head>
-<body style="margin:0;font-family:sans-serif;background:#f2f2f2">
-<div style="background:#0b1220;color:white;padding:15px;text-align:center">
-<h2 style="margin:0">Shah Computer & Technology</h2>
-<p style="margin:5px 0 0">Nabiganj - 01717280806</p>
-</div>
-<div style="padding:15px">
-<div style="background:white;padding:15px;border-radius:10px;text-align:center">
-<h3>আমাদের দোকান চালু আছে!</h3>
-<p>আপনার সাইট এখন ঠিক হচ্ছে...</p>
-<p>WhatsApp: 01717280806</p>
-<p>Facebook: Shah Computer</p>
-<a href="https://www.facebook.com/share/1FwpbqXVei/" style="display:inline-block;background:#1877f2;color:white;padding:10px 20px;border-radius:8px;text-decoration:none;margin-top:10px">Facebook এ যান</a>
-</div>
-</div>
+<!DOCTYPE html><html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Shah Computer & Technology</title><link rel="manifest" href="manifest.json"><meta name="theme-color" content="#0b1220"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Hind Siliguri,sans-serif}body{background:#f1f5f9}.top{background:#0b1220;color:#fff;padding:14px;text-align:center;position:sticky;top:0;z-index:99}.card{background:#fff;margin:10px;border-radius:12px;padding:15px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.p{background:#fff;border-radius:10px;overflow:hidden}.p img{width:100%;height:120px;object-fit:cover}.p b{display:block;padding:8px;font-size:13px}.pr{color:#e11d48;padding:0 8px 8px;font-weight:800}.bottom{position:fixed;bottom:0;width:100%;background:#0b1220;display:flex;justify-content:space-around;padding:10px;color:#fff}.float{position:fixed;bottom:70px;right:10px;display:flex;flex-direction:column;gap:8px}.float a{width:50px;height:50px;border-radius:50%;display:grid;place-items:center;color:#fff;text-decoration:none;font-size:24px}.wa{background:#25d366}.fb{background:#1877f2}</style></head><body>
+<div class="top"><h3>Shah Computer & Technology</h3><small>Nabiganj | 01717280806</small></div>
+<div class="card" style="text-align:center"><h3>Shah Computer & Technology</h3><p>📍 Shahan Shah Market, Sherpur Road, Nabiganj</p><p>⏰ সকাল ৯টা - রাত ১০টা</p></div>
+<div class="card"><b>Our Products</b><div class="grid" id="g"></div></div>
+<div class="float"><a class="fb" href="https://www.facebook.com/share/1FwpbqXVei/"><i class="fab fa-facebook-f"></i></a><a class="wa" href="https://wa.me/8801717280806"><i class="fab fa-whatsapp"></i></a></div>
+<div class="bottom"><span><i class="fa fa-home"></i> Home</span><span><i class="fa fa-box"></i> Products</span><span><i class="fa fa-user"></i> Contact</span></div>
 <script>
-if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}
-</script>
-</body>
-</html>
+let data=[["HP Laptop 15s","38500","https://images.unsplash.com/photo-1496181133206-80ce9b88a853"],["Gaming PC Core i5","45000","https://images.unsplash.com/photo-1593642632823-8f785ba67e45"],["Dahua Monitor 22","8500","https://images.unsplash.com/photo-1527443224154-c4a3942d3acf"],["TP-Link Router","3200","https://images.unsplash.com/photo-1603899123684-92b9be0ea4c2"],["SSD 256GB","2800","https://images.unsplash.com/photo-1592899677977-9bb10ba5380b"],["Keyboard RGB","1200","https://images.unsplash.com/photo-1589578228447-e1a4e481c6c8"]];
+document.getElementById('g').innerHTML=data.map(x=>`<div class="p"><img src="${x[2]}"><b>${x[0]}</b><div class="pr">৳${x[1]}</div></div>`).join('');
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js')}
+</script></body></html>
