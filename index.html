@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shah Computer & Technology - Nabiganj</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family: 'Segoe UI', sans-serif}
+body{background:#f0f2f5}
+.topbar{background:#0b1220;color:white;padding:12px 15px;text-align:center;position:sticky;top:0;z-index:99;display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:900;font-size:16px;line-height:1.2}
+.logo span{color:#fff;background:#ff3b30;padding:2px 6px;border-radius:4px}
+.banner{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px}
+.banner img{width:100%;border-radius:10px;height:110px;object-fit:cover}
+.cat-title{padding:12px 15px;font-weight:800;font-size:16px}
+.categories{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:0 10px}
+.cat-card{background:white;border-radius:12px;padding:12px 5px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.06);cursor:pointer;border:2px solid transparent;transition:.2s}
+.cat-card.active{border-color:#0b1220;background:#eef2ff}
+.cat-card i{font-size:26px;margin-bottom:6px;display:block}
+.cat-card span{font-size:11px;font-weight:700;display:block;line-height:1.2}
+.flash{display:flex;justify-content:space-between;align-items:center;padding:15px 10px 5px}
+.flash h2{font-size:18px}
+.products{padding:10px;display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding-bottom:90px}
+.pcard{background:white;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.06);position:relative}
+.pcard img{width:100%;height:130px;object-fit:cover}
+.pinfo{padding:8px}
+.pinfo h4{font-size:13px;height:36px;overflow:hidden;line-height:1.3}
+.price{color:#e11d48;font-weight:800;font-size:14px}
+.old{font-size:11px;text-decoration:line-through;color:#888}
+.save{position:absolute;top:8px;left:0;background:#0ea5e9;color:white;font-size:11px;padding:3px 10px;border-radius:0 20px 20px 0}
+.bottomnav{position:fixed;bottom:0;width:100%;background:#0b1220;color:#aaa;display:flex;justify-content:space-around;padding:8px 0;z-index:100;border-top:1px solid #222}
+.bottomnav div{text-align:center;font-size:11px;cursor:pointer}
+.bottomnav i{display:block;font-size:20px;margin-bottom:2px}
+.bottomnav .active{color:white}
+.admin-panel{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#fff;z-index:200;overflow:auto;padding:20px}
+.admin-panel input,.admin-panel select,.admin-panel textarea{width:100%;padding:11px;margin:6px 0;border:1px solid #ccc;border-radius:8px}
+.btn{background:#16a34a;color:white;padding:10px 18px;border:none;border-radius:8px;font-weight:700;cursor:pointer}
+.float{position:fixed;bottom:85px;right:12px;display:flex;flex-direction:column;gap:10px;z-index:90}
+.float a{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;color:white;font-size:26px;text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.wa{background:#25d366}.fb{background:#1877f2}.ms{background:#0084ff}
+.shopinfo{background:white;margin:10px;border-radius:12px;padding:15px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.shopinfo h3{color:#0b1220}
+</style>
+</head>
+<body>
+<div class="topbar">
+<div class="logo"><span>ST</span> Shah Computer<br>& Technology</div>
+<div style="display:flex;gap:18px;font-size:20px"><a href="https://www.facebook.com/share/1FwpbqXVei/" style="color:white"><i class="fab fa-facebook"></i></a><i onclick="openAdmin()" class="fa fa-user" style="cursor:pointer"></i></div>
+</div>
+
+<div class="banner">
+<img src="https://images.unsplash.com/photo-1593642532400-2682810df593">
+<img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7">
+</div>
+
+<div class="shopinfo">
+<h3>🖥️ Shah Computer & Technology</h3>
+<p style="font-size:13px;margin-top:5px">📍 Shahan Shah Market, Sherpur Road, Nabigonj</p>
+<p style="font-size:13px">📞 01717-280806 | হোম ডেলিভারি</p>
+</div>
+
+<div class="cat-title">Categories - ক্যাটাগরি সিলেক্ট করুন</div>
+<div class="categories" id="catGrid"></div>
+
+<div class="flash"><h2><i class="fa fa-fire" style="color:red"></i> Flash Sale</h2><button onclick="showAll()" class="btn" style="background:#e5e7eb;color:#111;padding:6px 14px">All Products</button></div>
+<div class="products" id="productGrid"></div>
+
+<div class="float">
+<a class="fb" href="https://www.facebook.com/share/1FwpbqXVei/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+<a class="wa" href="https://wa.me/8801717280806" target="_blank"><i class="fab fa-whatsapp"></i></a>
+</div>
+
+<div class="bottomnav">
+<div class="active"><i class="fa fa-home"></i>Home</div>
+<div><i class="fa fa-percent"></i>OFFERS</div>
+<div><i class="fa fa-desktop"></i>PC Builder</div>
+<div><a href="https://maps.google.com/?q=Shahan+Shah+Market+Sherpur+Road+Nabigonj" style="color:inherit;text-decoration:none"><i class="fa fa-location-dot"></i>My Location</a></div>
+<div onclick="openAdmin()"><i class="fa fa-user"></i>Account</div>
+</div>
+
+<div class="admin-panel" id="admin">
+<h2>Admin Panel <button onclick="document.getElementById('admin').style.display='none'" style="float:right;background:#eee;border:none;padding:5px 12px;border-radius:5px">X</button></h2>
+<p style="font-size:13px;color:green;margin:8px 0">✅ Login Success - Password: shah1203</p>
+<select id="a_cat">
+<option>Laptop</option><option>Desktop PC</option><option>Components</option><option>Monitor</option><option>TV</option><option>Accessories</option><option>Gaming Chair</option><option>Sound Speaker</option><option>Gaming</option><option>Router & Networking</option><option>Security Surveillance</option><option>Printer</option><option>Graphics Card</option><option>SSD</option><option>Power & UPS</option><option>Processor</option><option>Motherboard</option><option>RAM</option><option>Hard Disk</option><option>Mouse & Keyboard</option>
+</select>
+<input id="a_name" placeholder="Product Name - যেমন: HP Laptop Core i5 12Gen">
+<input id="a_price" type="number" placeholder="দাম - যেমন: 38500">
+<input id="a_old" type="number" placeholder="আগের দাম - Save দেখাতে (যেমন: 40000)">
+<input id="a_img" placeholder="ছবির লিংক (ইন্টারনেট লিংক) - খালি রাখলে ডিফল্ট ছবি">
+<textarea id="a_desc" placeholder="Details - যেমন: 8GB RAM, 512GB SSD, 15.6 Display"></textarea>
+<button class="btn" onclick="addProduct()" style="width:100%;font-size:16px">+ Product Add করুন</button>
+<hr style="margin:15px 0">
+<h3>আপনার প্রোডাক্ট লিস্ট (মোট: <span id="count">0</span> টা)</h3>
+<div id="adminList" style="margin-top:10px"></div>
+<button class="btn" style="background:#ef4444;margin-top:15px;width:100%" onclick="clearAll()">সব প্রোডাক্ট ডিলিট করুন</button>
+<div style="margin-top:20px;background:#f9fafb;padding:12px;border-radius:10px;font-size:13px">
+<p><b>দোকান:</b> Shah Computer & Technology</p>
+<p><b>ঠিকানা:</b> Shahan Shah Market, Sherpur Road, Nabigonj</p>
+<p><b>ফোন:</b> 01717280806</p>
+<p><b>Facebook:</b> <a href="https://www.facebook.com/share/1FwpbqXVei/">facebook.com/share/1FwpbqXVei</a></p>
+</div>
+</div>
+
+<script>
+let cats=[
+{n:"Laptop",i:"fa-laptop",c:"#ff6b6b"},{n:"Desktop PC",i:"fa-desktop",c:"#4dabf7"},
+{n:"Components",i:"fa-microchip",c:"#be4bdb"},{n:"Monitor",i:"fa-tv",c:"#845ef7"},
+{n:"TV",i:"fa-tv",c:"#ff922b"},{n:"Accessories",i:"fa-plug",c:"#20c997"},
+{n:"Gaming Chair",i:"fa-chair",c:"#339af0"},{n:"Sound Speaker",i:"fa-volume-high",c:"#e64980"},
+{n:"Gaming",i:"fa-gamepad",c:"#ae3ec9"},{n:"Router & Networking",i:"fa-wifi",c:"#1c7ed6"},
+{n:"Security Surveillance",i:"fa-shield-halved",c:"#2b8a3e"},{n:"Printer",i:"fa-print",c:"#d9480f"},
+{n:"Graphics Card",i:"fa-memory",c:"#0b7285"},{n:"SSD",i:"fa-hard-drive",c:"#5f3dc4"},
+{n:"Power & UPS",i:"fa-battery-full",c:"#087f5b"},{n:"Processor",i:"fa-microchip",c:"#e8590c"},
+{n:"Motherboard",i:"fa-server",c:"#7048e8"},{n:"RAM",i:"fa-memory",c:"#0ca678"},
+{n:"Mouse & Keyboard",i:"fa-computer-mouse",c:"#f76707"}
+];
+let defaultProducts=[
+{cat:"Laptop",name:"HP 15s Core i3 12Gen 8/512",price:38500,old:40000,img:"https://images.unsplash.com/photo-1496181133206-80ce9b88a853"},
+{cat:"Laptop",name:"Dell Inspiron 15 Core i5",price:62000,old:65000,img:"https://images.unsplash.com/photo-1588872657576-7efd1f1555ed"},
+{cat:"Desktop PC",name:"Core i5 Gaming PC Full Setup",price:45000,old:47000,img:"https://images.unsplash.com/photo-1593642632823-8f785ba67e45"},
+{cat:"Monitor",name:"Dahua 22 Inch Borderless Monitor",price:8500,old:9000,img:"https://images.unsplash.com/photo-1527443224154-c4a3942d3acf"},
+{cat:"Router & Networking",name:"TP-Link Archer C6 Router",price:3200,old:3500,img:"https://images.unsplash.com/photo-1603899123684-92b9be0ea4c2"},
+{cat:"Security Surveillance",name:"Hikvision 4 Camera Full Set",price:14500,old:16000,img:"https://images.unsplash.com/photo-1558002038-1055907df827"},
+{cat:"SSD",name:"HP EX900 256GB NVMe SSD",price:2800,old:3200,img:"https://images.unsplash.com/photo-1592899677977-9bb10ba5380b"},
+{cat:"Processor",name:"Intel Core i5 12400 Processor",price:18500,old:19500,img:"https://images.unsplash.com/photo-1587202372634-32705d7bf9f9"}
+];
+let products=JSON.parse(localStorage.getItem('shah_products_v2')||'null')||defaultProducts;
+let currentCat=null;
+function renderCats(){
+ document.getElementById('catGrid').innerHTML=cats.map(c=>`<div class="cat-card ${currentCat===c.n?'active':''}" onclick="filterCat('${c.n}')"><i class="fa ${c.i}" style="color:${c.c}"></i><span>${c.n}</span></div>`).join('');
+}
+function renderProducts(list){
+ if(list.length===0){document.getElementById('productGrid').innerHTML='<p style="padding:20px;background:white;margin:10px;border-radius:10px">এই ক্যাটাগরিতে এখনো প্রোডাক্ট নেই। Account > Admin থেকে Add করুন</p>';return;}
+ document.getElementById('productGrid').innerHTML=list.map(p=>`<div class="pcard">${p.old?`<div class="save">Save: ${p.old-p.price}৳</div>`:''}<img src="${p.img||'https://images.unsplash.com/photo-1593642632823-8f785ba67e45'}"><div class="pinfo"><h4>${p.name}</h4><div class="old">${p.old?`৳${p.old}`:''}</div><div class="price">৳${p.price}</div></div></div>`).join('');
+}
+function filterCat(name){currentCat=name;renderCats();renderProducts(products.filter(p=>p.cat===name));window.scrollTo({top:350,behavior:'smooth'});}
+function showAll(){currentCat=null;renderCats();renderProducts(products);}
+function openAdmin(){let pass=prompt('Admin Password দিন:');if(pass!=='shah1203'){alert('ভুল পাসওয়ার্ড!');return;}document.getElementById('admin').style.display='block';renderAdminList();}
+function addProduct(){
+ let p={cat:document.getElementById('a_cat').value,name:document.getElementById('a_name').value,price:parseInt(document.getElementById('a_price').value),old:parseInt(document.getElementById('a_old').value)||0,img:document.getElementById('a_img').value||'',desc:document.getElementById('a_desc').value||''};
+ if(!p.name||!p.price){alert('নাম ও দাম দিন');return;}
+ products.unshift(p);localStorage.setItem('shah_products_v2',JSON.stringify(products));renderProducts(currentCat?products.filter(x=>x.cat===currentCat):products);renderAdminList();document.getElementById('a_name').value='';document.getElementById('a_price').value='';alert('প্রোডাক্ট যোগ হয়েছে! ✅');
+}
+function renderAdminList(){document.getElementById('count').innerText=products.length;document.getElementById('adminList').innerHTML=products.map((p,i)=>`<div style="display:flex;justify-content:space-between;border-bottom:1px solid #eee;padding:8px;font-size:13px"><span>${i+1}. ${p.cat} - ${p.name} - ৳${p.price}</span><button onclick="del(${i})" style="background:red;color:white;border:none;padding:2px 8px;border-radius:4px">X</button></div>`).join('');}
+function del(i){if(confirm('ডিলিট করবেন?')){products.splice(i,1);localStorage.setItem('shah_products_v2',JSON.stringify(products));renderAdminList();renderProducts(products);}}
+function clearAll(){if(confirm('সব প্রোডাক্ট ডিলিট হবে?')){localStorage.removeItem('shah_products_v2');products=[...defaultProducts];renderProducts(products);renderAdminList();}}
+renderCats();renderProducts(products);
+</script>
+</body>
+</html>
