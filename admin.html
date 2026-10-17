@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shah Computer - Super Admin</title>
+<style>
+body{font-family:sans-serif;background:#f1f5f9;padding:15px}
+.box{background:white;padding:15px;border-radius:12px;max-width:600px;margin:auto;box-shadow:0 4px 12px #0002}
+input{width:100%;padding:12px;margin:6px 0;border:1px solid #ccc;border-radius:8px;box-sizing:border-box}
+button{width:100%;padding:14px;border:0;border-radius:8px;font-weight:bold;cursor:pointer;margin-top:8px}
+.btn-green{background:#16a34a;color:white}
+.btn-blue{background:#2563eb;color:white;font-size:18px}
+.item{display:flex;align-items:center;gap:10px;background:#f8fafc;padding:10px;border-radius:8px;margin:8px 0}
+.item img{width:50px;height:50px;object-fit:cover;border-radius:6px}
+</style>
+</head>
+<body>
+<div class="box">
+<h2>🔐 Shah Computer Super Admin</h2>
+<input id="token" type="password" placeholder="GitHub Token (github_pat_...) পেস্ট করুন">
+<input id="name" placeholder="প্রোডাক্ট নাম - যেমন: Motherboard H81">
+<input id="price" placeholder="দাম - যেমন: 3200" type="number">
+<input id="img" placeholder="ছবির লিংক (না দিলে অটো ছবি আসবে)">
+<button class="btn-green" onclick="add()">+ নতুন প্রোডাক্ট যোগ করুন</button>
+<div id="list"></div>
+<button class="btn-blue" onclick="save()">💾 সব পরিবর্তন সেভ করুন (দোকানে পোস্ট হবে)</button>
+<p id="msg"></p>
+</div>
+<script>
+let products=[];
+const tokenInput=document.getElementById('token');
+tokenInput.value=localStorage.getItem('gh_token')||'';
+tokenInput.oninput=()=>localStorage.setItem('gh_token',tokenInput.value);
+
+async function load(){
+ let res=await fetch('products.json?t='+Date.now());
+ products=await res.json();
+ render();
+}
+function render(){
+ let h='';
+ products.forEach((p,i)=>{
+   h+=`<div class="item"><img src="${p.img}"><div style="flex:1"><b>${p.name}</b><br>${p.price}৳</div><button onclick="edit(${i})">✏️</button><button onclick="del(${i})">🗑️</button></div>`;
+ });
+ document.getElementById('list').innerHTML=h;
+}
+function add(){
+ let n=document.getElementById('name').value;
+ let pr=document.getElementById('price').value;
+ let im=document.getElementById('img').value || 'https://images.unsplash.com/photo-1591488320449-011701bb6704';
+ if(!n||!pr) return alert('নাম ও দাম লিখুন');
+ products.unshift({name:n,price:pr,img:im});
+ document.getElementById('name').value='';document.getElementById('price').value='';document.getElementById('img').value='';
+ render();
+}
+function edit(i){
+ let n=prompt('নতুন নাম',products[i].name);
+ if(n) products[i].name=n;
+ let pr=prompt('নতুন দাম',products[i].price);
+ if(pr) products[i].price=pr;
+ render();
+}
+function del(i){ if(confirm('ডিলিট করবে?')){products.splice(i,1);render();} }
+
+async function save(){
+ let token=tokenInput.value.trim();
+ if(!token.startsWith('github_pat_')) return alert('Token পেস্ট করুন উপরে!');
+ document.getElementById('msg').innerText='⏳ সেভ হচ্ছে...';
+ try{
+   let getRes=await fetch('https://api.github.com/repos/shahalam19481-com/Shah-computer-shop/contents/products.json',{
+     headers:{Authorization:'Bearer '+token}
+   });
+   let getData=await getRes.json();
+   let sha=getData.sha;
+   let content=btoa(unescape(encodeURIComponent(JSON.stringify(products,null,2))));
+   let putRes=await fetch('https://api.github.com/repos/shahalam19481-com/Shah-computer-shop/contents/products.json',{
+     method:'PUT',
+     headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},
+     body:JSON.stringify({message:'update products via super admin',content:content,sha:sha})
+   });
+   if(putRes.ok){document.getElementById('msg').innerText='✅ হয়ে গেছে! ১ মিনিট পর দোকানে দেখাবে';}
+   else{let e=await putRes.text();document.getElementById('msg').innerText='❌ Error: '+e;}
+ }catch(e){document.getElementById('msg').innerText='❌ '+e.message}
+}
+load();
+</script>
+</body>
+</html>
