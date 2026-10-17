@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shah Computer - Image Fix Admin</title>
+<style>
+body{font-family:sans-serif;background:#f1f5f9;padding:10px}
+.box{background:white;padding:15px;border-radius:12px;max-width:650px;margin:auto;box-shadow:0 4px 15px #0002}
+input{width:100%;padding:12px;margin:5px 0;border:1px solid #ccc;border-radius:8px;box-sizing:border-box}
+button{padding:12px;border:0;border-radius:8px;font-weight:bold;cursor:pointer}
+.btn-green{background:#16a34a;color:white;width:100%;margin-top:8px}
+.btn-blue{background:#2563eb;color:white;width:100%;font-size:18px;margin-top:15px}
+.item{display:flex;gap:10px;background:#f8fafc;padding:10px;border-radius:10px;margin:10px 0;align-items:center;border:1px solid #e2e8f0}
+.item img{width:70px;height:70px;object-fit:cover;border-radius:8px;border:1px solid #ddd}
+.small{font-size:12px;color:#64748b}
+</style>
+</head>
+<body>
+<div class="box">
+<h2>🔧 Shah Computer - ছবি ঠিক করার Admin</h2>
+<p class="small">Token একবার বসালেই হবে। এখন ছবি নিজে বেছে বসাতে পারবে!</p>
+<input id="token" type="password" placeholder="GitHub Token github_pat_... পেস্ট করুন">
+<hr>
+<h3>নতুন প্রোডাক্ট যোগ করুন</h3>
+<input id="name" placeholder="নাম: যেমন Motherboard H81">
+<input id="price" placeholder="দাম: যেমন 3200" type="number">
+<p class="small">📷 ছবি বেছে নিন (মোবাইল থেকে):</p>
+<input id="imgFile" type="file" accept="image/*">
+<input id="img" placeholder="অথবা ছবির লিংক থাকলে এখানে পেস্ট করুন">
+<img id="preview" style="width:100px;display:none;margin:5px 0;border-radius:8px">
+<button class="btn-green" onclick="add()">+ প্রোডাক্ট যোগ করুন</button>
+<hr>
+<div id="list"></div>
+<button class="btn-blue" onclick="save()">💾 সব সেভ করুন (দোকানে যাবে)</button>
+<p id="msg"></p>
+</div>
+<script>
+let products=[]; let currentImgData='';
+const tokenInput=document.getElementById('token');
+tokenInput.value=localStorage.getItem('gh_token')||'';
+tokenInput.oninput=()=>localStorage.setItem('gh_token',tokenInput.value);
+document.getElementById('imgFile').addEventListener('change',function(e){
+ let file=e.target.files[0]; if(!file) return;
+ let reader=new FileReader();
+ reader.onload=function(ev){ currentImgData=ev.target.result; document.getElementById('preview').src=currentImgData; document.getElementById('preview').style.display='block'; document.getElementById('img').value=currentImgData; }
+ reader.readAsDataURL(file);
+});
+async function load(){ try{ let r=await fetch('products.json?t='+Date.now()); products=await r.json(); }catch{ products=[]; } render(); }
+function render(){
+ let h=''; products.forEach((p,i)=>{
+  h+=`<div class="item"><img src="${p.img}" onerror="this.src='https://via.placeholder.com/70'"><div style="flex:1"><b>${p.name}</b><br><span style="color:green;font-weight:bold">${p.price}৳</span></div><div><button onclick="edit(${i})">✏️ বদলান</button> <button onclick="del(${i})" style="background:#ef4444;color:white">🗑️</button></div></div>`;
+ }); document.getElementById('list').innerHTML=h || '<p>কোন প্রোডাক্ট নেই</p>';
+}
+function add(){
+ let n=document.getElementById('name').value.trim();
+ let pr=document.getElementById('price').value.trim();
+ let im=document.getElementById('img').value.trim() || currentImgData;
+ if(!n||!pr||!im) return alert('নাম, দাম ও ছবি ৩টাই লাগবে! ছবি বেছে নাও');
+ products.unshift({name:n,price:pr,img:im});
+ document.getElementById('name').value=''; document.getElementById('price').value=''; document.getElementById('img').value=''; document.getElementById('preview').style.display='none'; currentImgData=''; document.getElementById('imgFile').value='';
+ render();
+}
+function edit(i){
+ let n=prompt('নতুন নাম লিখুন:',products[i].name); if(n===null) return;
+ let pr=prompt('নতুন দাম:',products[i].price); if(pr===null) return;
+ let im=prompt('নতুন ছবির লিংক (ছবি বদলাতে চাইলে লিংক দিন, না হলে আগেরটাই থাকবে):',products[i].img);
+ products[i].name=n||products[i].name; products[i].price=pr||products[i].price; if(im) products[i].img=im;
+ render();
+}
+function del(i){ if(confirm('এই প্রোডাক্ট ডিলিট করবে?')){products.splice(i,1);render();} }
+async function save(){
+ let token=tokenInput.value.trim(); if(!token) return alert('উপরে Token দিন!');
+ document.getElementById('msg').innerText='⏳ সেভ হচ্ছে, ১৫ সেকেন্ড লাগবে...';
+ try{
+  let getRes=await fetch('https://api.github.com/repos/shahalam19481-com/Shah-computer-shop/contents/products.json',{headers:{Authorization:'Bearer '+token}});
+  let getData=await getRes.json(); let sha=getData.sha;
+  let content=btoa(unescape(encodeURIComponent(JSON.stringify(products,null,2))));
+  let putRes=await fetch('https://api.github.com/repos/shahalam19481-com/Shah-computer-shop/contents/products.json',{method:'PUT',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({message:'fix product image mapping',content:content,sha:sha})});
+  if(putRes.ok){document.getElementById('msg').innerText='✅ সফল! ১ মিনিট পর দোকানে ছবি ও নাম মিলে যাবে!';}
+  else{let t=await putRes.text(); document.getElementById('msg').innerText='❌ হয়নি: '+t;}
+ }catch(e){document.getElementById('msg').innerText='❌ '+e.message}
+}
+load();
+</script>
+</body>
+</html>
